@@ -1,0 +1,24 @@
+{
+  "name": "dictionary-tool",
+  "version": "1.0.0",
+  "description": "Command line dictionary tool using wordnik api",
+  "main": "master.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PulkitSaxena/dictionary-tool.git"
+  },
+  "keywords": [
+    "wordnik",
+    "node.js",
+    "dictionary"
+  ],
+  "author": "Pulkit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PulkitSaxena/dictionary-tool/issues"
+  },
+  "homepage": "https://github.com/PulkitSaxena/dictionary-tool#readme"
+}
