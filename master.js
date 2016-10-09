@@ -6,7 +6,9 @@
 var READLINE       = require('readline');
 
 // local imports
-var MESSAGE        = require(__dirname + '/utils/message.js');
+var MESSAGE        = require(__dirname + '/utils/message.js'),
+    ROUTES         = require(__dirname + '/routes/routes'),
+    CONFIG         = require(__dirname + '/conf/appConf.js');
 
 
 // creating a command line interface for interaction with user
@@ -21,6 +23,8 @@ console.log(MESSAGE.STARTUP_MESSAGE);
 
 // attaching the listeners to our input interface's line event
 inputInterface.on('line', (line) => {
+  // calling routes
+  ROUTES(line.trim(), CONFIG);
   // reset prompt marker to new line
   inputInterface.prompt();
 });
@@ -30,4 +34,5 @@ inputInterface.on('SIGINT', () => {
   inputInterface.question('Are you sure you want to exit app? ', (answer) => {
     if (answer.match(/^y(es)?$/i)) inputInterface.pause();
   });
+
 });
