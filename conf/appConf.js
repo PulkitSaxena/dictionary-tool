@@ -12,21 +12,24 @@ var CONF = {
 
   // API url
   API_URL           : {
-    BASE_URL     : 'http://api.wordnik.com:80/v4/word.json/',
-    DEFINITIONS  : '/definitions?limit=100&includeRelated=true&useCanonical=false&includeTags=false&api_key=',
-    SYNONYMS     : '/relatedWords?useCanonical=false&relationshipTypes=synonym&limitPerRelationshipType=10&api_key=',
-    ANTONYMS     : '/relatedWords?useCanonical=false&relationshipTypes=antonym&limitPerRelationshipType=10&api_key=',
-
+    BASE_URL              : 'http://api.wordnik.com:80/v4/word.json/',
+    DEFINITIONS           : '/definitions?limit=100&includeRelated=true&useCanonical=false&includeTags=false&api_key=',
+    SYNONYMS              : '/relatedWords?useCanonical=false&relationshipTypes=synonym&limitPerRelationshipType=10&api_key=',
+    ANTONYMS              : '/relatedWords?useCanonical=false&relationshipTypes=antonym&limitPerRelationshipType=10&api_key=',
+    EXAMPLES              : '/examples?includeDuplicates=false&useCanonical=false&skip=0&limit=5&api_key=',
+    WORD_OF_THE_DAY_PRE   : 'http://api.wordnik.com:80/v4/words.json/wordOfTheDay?date=',
+    WORD_OF_THE_DAY_POST  : '&api_key='
   },
 
-  APP                : './dict',
+  APP               : './dict',
 
   COMMANDS          : {
     DEFINITIONS  : 'def',
     SYNONYMS     : 'syn',
     ANTONYMS     : 'ant',
     EXAMPLES     : 'ex',
-    DICTIONARY   : 'dict'
+    DICTIONARY   : 'dict',
+    HELP         : '--help'
   }
 };
 

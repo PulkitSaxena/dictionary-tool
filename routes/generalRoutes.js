@@ -25,6 +25,7 @@ GeneralRoutes.prototype.route = function(){
 
   if(this._app && this._app == this._config.APP){
 
+    // action according the coming command
     switch(this._command){
       case this._config.COMMANDS.DEFINITIONS:
           GENERAL_FEATURES.displayDefinitions(this._word);
@@ -35,6 +36,17 @@ GeneralRoutes.prototype.route = function(){
       case this._config.COMMANDS.ANTONYMS:
           GENERAL_FEATURES.displayAntonyms(this._word);
           break;
+      case this._config.COMMANDS.EXAMPLES:
+          GENERAL_FEATURES.displayExamples(this._word);
+          break;
+      case this._config.COMMANDS.DICTIONARY:
+          GENERAL_FEATURES.displayFullDictionary(this._word);
+          break;
+      case this._config.COMMANDS.HELP:
+          GENERAL_FEATURES.displayHelp();
+          break;
+      default:
+          GENERAL_FEATURES.defaultAction(this._command);
     }
   }
 

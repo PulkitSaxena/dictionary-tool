@@ -11,9 +11,11 @@ var Helpers = {
 */
 
   showArrayData : function(heading, array){
+    if(array.length == 0)
+      return;
     // printing heading
-    if(array.length > 0)
-      console.log(COLORS.green(heading) + '\n');
+    console.log(COLORS.green('------------------------------------------------------------------'));
+    console.log(COLORS.green(heading) + '\n');
     // printing data
     array.forEach((el) => {
       console.log(COLORS.blue(el + '\n'));
