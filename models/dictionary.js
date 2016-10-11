@@ -1,5 +1,6 @@
 // imports
 var HELPERS   =  require(__dirname + '/../utils/helpers.js');
+var COLORS    =  require('colors/safe');
 
 /**
  * This defines the constructor for the word dictionary model class
@@ -8,8 +9,6 @@ var HELPERS   =  require(__dirname + '/../utils/helpers.js');
  */
 
  function Dictionary(word, data){
-   if(!data || word)
-    return
 
   // private members
   this._word          =   word;
@@ -18,6 +17,24 @@ var HELPERS   =  require(__dirname + '/../utils/helpers.js');
   this._synonyms      =   data['synonyms']? data['synonyms']:[];
   this._examples      =   data['examples']? data['examples']:[];
 
- }
+}
+
+/**
+* This defines the function to display the dictionary data
+* @param {object} config
+*/
+
+Dictionary.prototype.showDictionary = function(){
+  // printing the word
+  console.log(COLORS.green('Word: ' + this._word + '\n'));
+  // printing definitions
+  HELPERS.showArrayData('Definitions', this._definitions);
+  // printing synonyms
+  HELPERS.showArrayData('Synonyms ', this._synonyms);
+  // printing antonyms
+  HELPERS.showArrayData('Antonyms', this._antonyms);
+  // printing examples
+  HELPERS.showArrayData('Examples', this._examples);
+};
 
 module.exports = Dictionary;

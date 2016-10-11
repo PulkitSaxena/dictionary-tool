@@ -17,6 +17,16 @@ var CONF = {
     SYNONYMS     : '/relatedWords?useCanonical=false&relationshipTypes=synonym&limitPerRelationshipType=10&api_key=',
     ANTONYMS     : '/relatedWords?useCanonical=false&relationshipTypes=antonym&limitPerRelationshipType=10&api_key=',
 
+  },
+
+  APP                : './dict',
+
+  COMMANDS          : {
+    DEFINITIONS  : 'def',
+    SYNONYMS     : 'syn',
+    ANTONYMS     : 'ant',
+    EXAMPLES     : 'ex',
+    DICTIONARY   : 'dict'
   }
 };
 

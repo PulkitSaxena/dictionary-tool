@@ -1,5 +1,6 @@
 // local imports
 var WEBNIK_SERVICE    = require(__dirname + '/../services/webnikService.js');
+var DICTIONARY        = require(__dirname + '/../models/dictionary.js');
 
 // public exposed features
 var generalFeatures   = {
@@ -10,9 +11,13 @@ var generalFeatures   = {
  */
 
   displayDefinitions: function(word){
-    var deferred = WEBNIK_SERVICE.getDefinitions(word);
+    var deferred      = WEBNIK_SERVICE.getDefinitions(word),
+        processedData;
+
     deferred.then(function(response){
-      console.log(response);
+      processedData = _processDefinitionData(response.body);
+
+      _getDictionaryModel(word, processedData).showDictionary();
     },function(err){
       console.log(err.body);
     });
@@ -23,7 +28,7 @@ var generalFeatures   = {
  * @param {String} word
  */
 
-  displaySynonyms: function(){
+  displaySynonyms: function(word){
     var deferred = WEBNIK_SERVICE.getSynonyms(word);
     deferred.then(function(response){
       console.log(response);
@@ -37,7 +42,7 @@ var generalFeatures   = {
  * @param {String} word
  */
 
-  displayAntonyms: function(){
+  displayAntonyms: function(word){
     var deferred = WEBNIK_SERVICE.getAntonyms(word);
     deferred.then(function(response){
       console.log(response);
@@ -47,6 +52,35 @@ var generalFeatures   = {
   }
 
 };
+
+/**
+ * Creates and returns a dictionary model object
+ * @param {String} word
+ * @private
+ */
+
+function _getDictionaryModel(word, data){
+    return new DICTIONARY(word, data);
+}
+
+/**
+ * Processes the elements of definition array
+ * @param {Array} defArray
+ * @private
+ */
+
+function _processDefinitionData(defArray){
+  var definitions  = [],
+      data         = {},
+      self         = this;
+
+  JSON.parse(defArray).forEach(function(def){
+    definitions.push(def.partOfSpeech + ' | ' + def.text);
+  });
+
+  data['definitions'] = definitions;
+  return data;
+}
 
 // exporting module
 module.exports = generalFeatures;
