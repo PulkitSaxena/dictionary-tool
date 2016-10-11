@@ -1,6 +1,8 @@
 // local imports
 var WEBNIK_SERVICE    = require(__dirname + '/../services/webnikService.js');
 var DICTIONARY        = require(__dirname + '/../models/dictionary.js');
+var MESSAGES         = require(__dirname + '/../utils/message.js');
+var COLORS            = require('colors/safe');
 
 // public exposed features
 var generalFeatures   = {
@@ -16,10 +18,9 @@ var generalFeatures   = {
 
     deferred.then(function(response){
       processedData = _processDefinitionData(response.body);
-
       _getDictionaryModel(word, processedData).showDictionary();
     },function(err){
-      console.log(err.body);
+      console.log(COLORS.red(err.body));
     });
   },
 
@@ -29,11 +30,14 @@ var generalFeatures   = {
  */
 
   displaySynonyms: function(word){
-    var deferred = WEBNIK_SERVICE.getSynonyms(word);
+    var deferred      = WEBNIK_SERVICE.getSynonyms(word),
+        processedData;
+
     deferred.then(function(response){
-      console.log(response);
+      processedData = _processRelatedWords('synonyms', JSON.parse(response.body));
+      _getDictionaryModel(word, processedData).showDictionary();
     },function(err){
-      console.log(err.body);
+      console.log(COLORS.red(err.body));
     });
   },
 
@@ -43,11 +47,14 @@ var generalFeatures   = {
  */
 
   displayAntonyms: function(word){
-    var deferred = WEBNIK_SERVICE.getAntonyms(word);
+    var deferred = WEBNIK_SERVICE.getAntonyms(word),
+        processedData;
+
     deferred.then(function(response){
-      console.log(response);
+      processedData = _processRelatedWords('antonyms', JSON.parse(response.body));
+      _getDictionaryModel(word, processedData).showDictionary();
     },function(err){
-      console.log(err.body);
+      console.log(COLORS.red(err.body));
     });
   }
 
@@ -71,14 +78,35 @@ function _getDictionaryModel(word, data){
 
 function _processDefinitionData(defArray){
   var definitions  = [],
-      data         = {},
-      self         = this;
+      data         = {};
 
   JSON.parse(defArray).forEach(function(def){
     definitions.push(def.partOfSpeech + ' | ' + def.text);
   });
 
+  if(definitions.length == 0)
+    console.log(COLORS.red(MESSAGES.NO_DATA));
   data['definitions'] = definitions;
+  return data;
+}
+
+/**
+ * Processes the elements of related words array
+ * @param {String} type
+ * @private
+ */
+
+function _processRelatedWords(type, body){
+  var relatedWords = [],
+      data         = {};
+
+  if(body.length == 0)
+    console.log(COLORS.red(MESSAGES.NO_DATA));
+
+  (body[0].words).forEach(function(word){
+    relatedWords.push(word + ',');
+  });
+  data[type] =  relatedWords;
   return data;
 }
 

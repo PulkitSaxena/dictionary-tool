@@ -13,7 +13,7 @@ var Helpers = {
   showArrayData : function(heading, array){
     // printing heading
     if(array.length > 0)
-      console.log(COLORS.green(heading));
+      console.log(COLORS.green(heading) + '\n');
     // printing data
     array.forEach((el) => {
       console.log(COLORS.blue(el + '\n'));

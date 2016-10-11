@@ -1,4 +1,4 @@
-var generalFeatures  = require(__dirname + '/../controllers/generalFeatures.js');
+var GENERAL_FEATURES  = require(__dirname + '/../controllers/generalFeatures.js');
 
 /**
  * This defines the constructor for the general route class
@@ -27,9 +27,14 @@ GeneralRoutes.prototype.route = function(){
 
     switch(this._command){
       case this._config.COMMANDS.DEFINITIONS:
-          generalFeatures.displayDefinitions(this._word);
+          GENERAL_FEATURES.displayDefinitions(this._word);
           break;
-
+      case this._config.COMMANDS.SYNONYMS:
+          GENERAL_FEATURES.displaySynonyms(this._word);
+          break;
+      case this._config.COMMANDS.ANTONYMS:
+          GENERAL_FEATURES.displayAntonyms(this._word);
+          break;
     }
   }
 
