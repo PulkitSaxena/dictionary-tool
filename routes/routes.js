@@ -21,7 +21,7 @@ function Routes(data, config){
     new GENERAL_ROUTES(data, config).route();
   }
   else if(config['ENABLE_GAME_ROUTES'] == true){
-
+    new GAME_ROUTES(data, config).route();
   }
 
 };

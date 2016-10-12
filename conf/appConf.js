@@ -23,14 +23,24 @@ var CONF = {
 
   APP               : './dict',
 
+  // general commands
   COMMANDS          : {
     DEFINITIONS  : 'def',
     SYNONYMS     : 'syn',
     ANTONYMS     : 'ant',
     EXAMPLES     : 'ex',
     DICTIONARY   : 'dict',
-    HELP         : '--help'
-  }
+    HELP         : '--help',
+    PLAY         : 'play'
+  },
+
+  // possible game inputs
+  GAME_COMMANDS     :{
+    TRY_AGAIN    : 1,
+    HINT         : 2,
+    QUIT         : 3
+  },
+
 };
 
 module.exports = CONF;

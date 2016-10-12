@@ -1,4 +1,6 @@
+// local imports
 var GENERAL_FEATURES  = require(__dirname + '/../controllers/generalFeatures.js');
+var IROUTES           = require(__dirname + '/iRoutes.js');
 
 /**
  * This defines the constructor for the general route class
@@ -15,6 +17,9 @@ function GeneralRoutes(data, config){
   this._config    = config;
 
 }
+
+// inheriting the basic structure
+GeneralRoutes.prototype   =   Object.create(IROUTES);
 
 /**
  * This defines the function to detect the command type route and call feature
