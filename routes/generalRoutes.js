@@ -1,5 +1,6 @@
 // local imports
 var GENERAL_FEATURES  = require(__dirname + '/../controllers/generalFeatures.js');
+var GAME_FEATURES     = require(__dirname + '/../controllers/gameFeatures.js');
 var IROUTES           = require(__dirname + '/iRoutes.js');
 
 /**
@@ -8,13 +9,14 @@ var IROUTES           = require(__dirname + '/iRoutes.js');
  * @param {object} config
  */
 
-function GeneralRoutes(data, config){
+function GeneralRoutes(data, options){
 
   // data
   this._app       = data[0];
   this._command   = data[1];
   this._word      = data[2];
-  this._config    = config;
+  this._config    = options['config'];
+  this._gameState = options['gameState'];
 
 }
 
@@ -46,6 +48,9 @@ GeneralRoutes.prototype.route = function(){
           break;
       case this._config.COMMANDS.DICTIONARY:
           GENERAL_FEATURES.displayFullDictionary(this._word);
+          break;
+      case this._config.COMMANDS.PLAY:
+          GAME_FEATURES.initializeGame(this._gameState);
           break;
       case this._config.COMMANDS.HELP:
           GENERAL_FEATURES.displayHelp();

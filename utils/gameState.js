@@ -2,10 +2,10 @@
  * This defines the state of the game at any time
  */
 
-var GameState : {
+var GameState =   {
 
   // toggle game on and off
-  GAME_ENABLED              : false
+  GAME_ENABLED              : false,
 
   // if to accept the answer
   ANSWER_ENABLED            : false,
@@ -26,3 +26,6 @@ var GameState : {
   ANTONYMS                  : []
 
 }
+
+// exporting the module
+module.exports = GameState;

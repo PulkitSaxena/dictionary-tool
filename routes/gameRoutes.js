@@ -1,5 +1,5 @@
 // local imports
-var IROUTES             = require(__dirname + 'iRoutes.js');
+var IROUTES             = require(__dirname + '/iRoutes.js');
 
 /**
  * This defines the constructor for the general route class
@@ -7,10 +7,12 @@ var IROUTES             = require(__dirname + 'iRoutes.js');
  * @param {object} config
  */
 
-function GameRoutes(input, config){
+function GameRoutes(input, options){
 
-  this._input           : input;
-  this._config          : config;
+  // data
+  this._input           = input;
+  this._config          = options['config'];
+  this._options         = options['gameState'];
 
 }
 

@@ -59,8 +59,20 @@ var WebnikApi     = {
   getWordOfTheDay: function(){
     var currentDate  = (new Date()).toISOString().slice(0,10),
         apiUrl       = CONF.API_URL.WORD_OF_THE_DAY_PRE + currentDate
-                       + CONF.API_URL.WORD_OF_THE_DAY_POST + CONF.API_KEY;
+                       + CONF.API_URL.WORD_OF_THE_DAY_POST + CONF.API_KEY,
         deferred     = _requestApi(apiUrl);
+    return deferred;
+  },
+
+  /**
+   * Service for fetching random word from webnik.
+   * @param {String} word
+   */
+
+  getRandomWord: function(){
+    var apiUrl      = CONF.API_URL.RANDOM_WORD + CONF.API_KEY;
+        deferred    = _requestApi(apiUrl);
+
     return deferred;
   }
 

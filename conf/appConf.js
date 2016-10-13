@@ -18,7 +18,9 @@ var CONF = {
     ANTONYMS              : '/relatedWords?useCanonical=false&relationshipTypes=antonym&limitPerRelationshipType=10&api_key=',
     EXAMPLES              : '/examples?includeDuplicates=false&useCanonical=false&skip=0&limit=5&api_key=',
     WORD_OF_THE_DAY_PRE   : 'http://api.wordnik.com:80/v4/words.json/wordOfTheDay?date=',
-    WORD_OF_THE_DAY_POST  : '&api_key='
+    WORD_OF_THE_DAY_POST  : '&api_key=',
+    RANDOM_WORD           : 'http://api.wordnik.com:80/v4/words.json/randomWord?hasDictionaryDef=false&minCorpusCount=0&maxCorpusCount=-1'
+                            + '&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=-1&api_key='
   },
 
   APP               : './dict',
