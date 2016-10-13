@@ -175,11 +175,14 @@ var GameFeatures  = {
     });
 
     // displa relevent message according to the answer status
-    if(answerStatus)
-      console.log(COLORS.green('\nCorrect answer'));
-    else
+    if(answerStatus){
+        console.log(COLORS.green('\nCorrect answer'));
+        this.quitGame(gameState);
+    }
+    else{
       console.log(COLORS.red('\nWrong answer'));
       console.log(COLORS.green(MESSAGES.GAME_OPTIONS));
+    }
   },
 
   /**
@@ -210,6 +213,51 @@ var GameFeatures  = {
   nextChance: function(){
     console.log(COLORS.green(MESSAGES.TRY_AGAIN));
   },
+
+  /**
+  *  quite the game and reset the game state
+  * @param {JSON} gameState
+  */
+
+  getHint: function(gameState){
+    var hintCount   = gameState.HINT_COUNTER,
+        hint        = [],
+        message;
+
+    switch(hintCount){
+      case 0:
+          hint.push(UTILS.getJumbleWord(gameState.WORD));
+          message   = MESSAGES.HINTS.JUMBLE_WORD;
+          break;
+      case 1:
+          hint.push(gameState.DEFINITIONS.pop());
+          message   = MESSAGES.HINTS.DEFINITION;
+          break;
+      case 2:
+          hint.push(gameState.SYNONYMS.pop());
+          message   = MESSAGES.HINTS.SYNONYM;
+          break;
+      case 3:
+          hint.push(gameState.ANTONYMS.pop());
+          message   = MESSAGES.HINTS.ANTONYM;
+          break;
+    }
+
+    // if no hint is available then provide the jumble word
+    if(hintCount > 0 && typeof hint[0] == 'undefined'){
+      hint[0]   = UTILS.getJumbleWord(gameState.WORD);
+      message   = MESSAGES.HINTS.JUMBLE_WORD;
+    }
+
+    // printing the hint
+    UTILS.showArrayData(message, hint);
+
+    // updating the value of  hint counter
+    if(hint == 3)
+      gameState.HINT_COUNTER = 0;
+    else
+      gameState.HINT_COUNTER = gameState.HINT_COUNTER + 1;
+  }
 
 }
 

@@ -1,5 +1,6 @@
 // imports
-var COLORS  = require('colors/safe');
+var COLORS            = require('colors/safe');
+var __                = require('underscore');
 
 // Defines all the helper functions
 
@@ -21,6 +22,18 @@ var Helpers = {
       console.log(COLORS.blue(el + '\n'));
     });
   },
+
+/**
+* Creates a jumble word for the given word and returns it
+* @param {String} word
+*/
+
+  getJumbleWord :  function(word){
+    var wordsArray      = word.split('');
+        jumbleArray     = __.shuffle(wordsArray);
+
+    return jumbleArray.join('');
+  }
 
 };
 

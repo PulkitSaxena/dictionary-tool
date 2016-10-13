@@ -33,7 +33,7 @@ GameRoutes.prototype.route = function(){
           GAME_FEATURES.nextChance();
           break;
       case this._config.GAME_COMMANDS.HINT:
-          GAME_FEATURES.getHint();
+          GAME_FEATURES.getHint(this._gameState);
           break;
       case this._config.GAME_COMMANDS.QUIT:
           GAME_FEATURES.quitGame(this._gameState);
