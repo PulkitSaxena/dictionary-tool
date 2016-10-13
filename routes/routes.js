@@ -1,5 +1,6 @@
 // local imports
-var GENERAL_ROUTES = require(__dirname + '/generalRoutes.js');
+var GENERAL_ROUTES    = require(__dirname + '/generalRoutes.js');
+var GAME_ROUTES       = require(__dirname + '/gameRoutes');
 
 /**
  * This defines selection of route type, takes two parameters.
@@ -23,10 +24,10 @@ function Routes(data, config, gameState){
   data = data.split(' ');
 
   // select the type of routes either general or word game related
-  if(config['ENABLE_GAME_ROUTES'] == false){
+  if(gameState['GAME_ENABLED'] == false){
     new GENERAL_ROUTES(data, options).route();
   }
-  else if(config['ENABLE_GAME_ROUTES'] == true){
+  else if(gameState['GAME_ENABLED'] == true){
     new GAME_ROUTES(data, options).route();
   }
 

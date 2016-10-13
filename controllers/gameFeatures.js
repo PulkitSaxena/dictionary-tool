@@ -1,6 +1,8 @@
 // local imports
 var WEBNIK_SERVICE    = require(__dirname + '/../services/webnikService.js');
 var MESSAGES          = require(__dirname + '/../utils/message.js');
+var UTILS             = require(__dirname + '/../utils/helpers');
+var GENERAL_FEATURES  = require(__dirname + '/../controllers/generalFeatures.js');
 // module imports
 var COLORS            = require('colors/safe');
 var DEFERRED          = require('deferred');
@@ -133,8 +135,81 @@ var GameFeatures  = {
   */
 
   askQuestion: function(gameState){
-    
-  }
+    var question  = [];
+    // taking definition
+    if(gameState.DEFINITIONS.length > 0){
+      question.push(gameState.DEFINITIONS.pop());
+    }
+    // if synonym present take it otherwise take antonym
+    if(gameState.SYNONYMS.length > 0){
+      question.push(gameState.SYNONYMS.pop());
+    }
+    else if(gameState.ANTONYMS.length > 0){
+      question.push(gameState.ANTONYMS.pop());
+    }
+    // Display the question
+    UTILS.showArrayData(MESSAGES.QUESTION_HEADING, question);
+    console.log(COLORS.green(MESSAGES.ENTER_ANSWER));
+    // enable answer
+    gameState.ENABLE_ANSWER  = true;
+  },
+
+  /**
+  *  asks the question for the just fetched random question
+  * @param {String} answer
+  * @param {JSON} gameState
+  */
+
+  checkAnswer: function(answer, gameState){
+    var answerStatus;
+
+    // firstly checking against the word
+    if(gameState.WORD.toLowerCase() == answer.toLowerCase())
+      answerStatus = true;
+
+    // checking against not till now asked synonyms of the asked word
+    (gameState.SYNONYMS).forEach((syn) => {
+      if(syn.toLowerCase() == answer.toLowerCase()){
+        answerStatus  = true;
+      }
+    });
+
+    // displa relevent message according to the answer status
+    if(answerStatus)
+      console.log(COLORS.green('\nCorrect answer'));
+    else
+      console.log(COLORS.red('\nWrong answer'));
+      console.log(COLORS.green(MESSAGES.GAME_OPTIONS));
+  },
+
+  /**
+  *  quite the game and reset the game state
+  * @param {JSON} gameState
+  */
+
+  quitGame:  function(gameState){
+    // display word and its full dictionary, resuing the general feature
+    GENERAL_FEATURES.displayFullDictionary(gameState.WORD);
+
+    console.log(COLORS.green(MESSAGES.GAME_QUIT));
+
+    // reset the game state
+    gameState.GAME_ENABLED  = false;
+    gameState.WORD          = null;
+    gameState.DEFINITIONS   = [];
+    gameState.SYNONYMS      = [];
+    gameState.ANTONYMS      = [];
+    gameState.HINT_COUNTER  = 0;
+
+  },
+
+  /**
+  *  displays message try agin to user, in response to user inout 1
+  */
+
+  nextChance: function(){
+    console.log(COLORS.green(MESSAGES.TRY_AGAIN));
+  },
 
 }
 
